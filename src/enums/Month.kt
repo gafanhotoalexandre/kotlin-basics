@@ -9,6 +9,9 @@ fun main() {
 
     val nextMonth = yearMonth.next().next()
     println(nextMonth)
+
+    println(Month.getEnumByNumberOfMonth(11))
+    println(Month.valueOf("AUGUST"))
 }
 
 enum class Month(
@@ -31,5 +34,12 @@ enum class Month(
         return entries
                 .find { it.numberOfMonth == numberOfMonth + 1 }
                 ?: JANUARY
+    }
+
+    companion object {
+        fun getEnumByNumberOfMonth(numberOfMonth: Int): Month {
+            return entries
+                    .first { it.numberOfMonth == numberOfMonth }
+        }
     }
 }
