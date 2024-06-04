@@ -1,5 +1,8 @@
 package enums
 
+import java.util.function.BinaryOperator
+import java.util.function.IntBinaryOperator
+
 fun main() {
     println(
         Operation.PLUS.apply(40, 30)
@@ -10,7 +13,7 @@ fun main() {
     )
 }
 
-enum class Operation {
+enum class Operation : BinaryOperator<Int>, IntBinaryOperator {
     PLUS {
         override fun apply(n1: Int, n2: Int) = n1 + n2
     },
@@ -18,5 +21,7 @@ enum class Operation {
         override fun apply(n1: Int, n2: Int) = n1 - n2
     };
 
-    abstract fun apply(n1: Int, n2: Int): Int
+    abstract override fun apply(n1: Int, n2: Int): Int
+
+    override fun applyAsInt(left: Int, right: Int) = apply(left, right)
 }
