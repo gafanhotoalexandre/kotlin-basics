@@ -12,6 +12,7 @@ fun main() {
 
     println(Month.getEnumByNumberOfMonth(11))
     println(Month.valueOf("AUGUST"))
+    println("$yearMonth -> ${yearMonth.getTotalDays()}")
 }
 
 enum class Month(
@@ -34,6 +35,14 @@ enum class Month(
         return entries
                 .find { it.numberOfMonth == numberOfMonth + 1 }
                 ?: JANUARY
+    }
+
+    fun getTotalDays(): Int {
+        return when(this) {
+            JANUARY, MARCH, MAY, JULY, AUGUST, OCTOBER, DECEMBER -> 31
+            FEBRUARY -> 28
+            else -> 30
+        }
     }
 
     companion object {
