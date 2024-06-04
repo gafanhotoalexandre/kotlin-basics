@@ -1,13 +1,18 @@
 package enums
 
 fun main() {
-    val yearMonth = Month.MAY
+    val yearMonth = Month.DECEMBER
 
     println(yearMonth)
+    println(yearMonth.name)
+    println(yearMonth.ordinal)
+
+    val nextMonth = yearMonth.next().next()
+    println(nextMonth)
 }
 
 enum class Month(
-    val numberOfMonth: Int
+    private val numberOfMonth: Int
 ) {
     JANUARY(1),
     FEBRUARY(2),
@@ -20,5 +25,11 @@ enum class Month(
     SEPTEMBER(9),
     OCTOBER(10),
     NOVEMBER(11),
-    DECEMBER(12)
+    DECEMBER(12);
+
+    fun next(): Month {
+        return entries
+                .find { it.numberOfMonth == numberOfMonth + 1 }
+                ?: JANUARY
+    }
 }
